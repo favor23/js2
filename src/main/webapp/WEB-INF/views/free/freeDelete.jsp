@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h2>freeList</h2>
+<h2>freeDelete</h2>
 </body>
 </html>
