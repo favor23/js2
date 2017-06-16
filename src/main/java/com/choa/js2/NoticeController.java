@@ -12,28 +12,32 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.choa.board.BoardDTO;
 import com.choa.notice.NoticeDTO;
-import com.choa.notice.NoticeService;
+import com.choa.notice.NoticeServiceImpl;
 
 
 @Controller
 @RequestMapping(value="/notice/**")
 public class NoticeController {
 	@Inject //인젝트는 type으로 찾는다
-	private NoticeService noticeService;
+	private NoticeServiceImpl noticeService;
 	
 	
 	@RequestMapping(value="noticeList")
-	public void noticeList(Model model,@RequestParam(defaultValue="1") Integer curPage) throws Exception{
+	public String noticeList(Model model,@RequestParam(defaultValue="1") Integer curPage) throws Exception{
 		
-		List<NoticeDTO> ar=noticeService.noticeList(curPage);
+		List<BoardDTO> ar=noticeService.boardList(curPage);
 		model.addAttribute("list",ar);
+		model.addAttribute("board","notice");
+		
+		return "board/boardList";
 	}
 
 
 	@RequestMapping(value="noticeView")
 	public void noticeView(Integer num, Model model) throws Exception{
-		NoticeDTO noticeDTO=noticeService.noticeView(num);
+		NoticeDTO noticeDTO=(NoticeDTO) noticeService.boardView(num);
 		model.addAttribute("dto",noticeDTO);
 	}
 	
@@ -44,7 +48,7 @@ public class NoticeController {
 	
 	@RequestMapping(value="noticeWrite",method=RequestMethod.POST)
 	public String noticeWrite(NoticeDTO noticeDTO,Model model,RedirectAttributes rd) throws Exception{
-		int result=noticeService.noticeWrite(noticeDTO);
+		int result=noticeService.boardWrite(noticeDTO);
 		String message="FAIL";
 		if(result>0){
 			message="SUCCESS";			
@@ -64,20 +68,20 @@ public class NoticeController {
 	
 	@RequestMapping(value="noticeUpdate")
 	public void noticeUpdate(Integer num, Model model) throws Exception{
-		NoticeDTO noticeDTO=noticeService.noticeView(num);
+		NoticeDTO noticeDTO=(NoticeDTO) noticeService.boardView(num);
 		model.addAttribute("dto",noticeDTO);
 	}
 	
 	@RequestMapping(value="noticeUpdate", method=RequestMethod.POST)
 	public String noticeUpdate(NoticeDTO noticeDTO,Model model) throws Exception{
-		int result=noticeService.noticeUpdate(noticeDTO);
+		int result=noticeService.boardUpdate(noticeDTO);
 		this.noticeView(noticeDTO.getNum(), model);
 		return "notice/noticeView";
 	}
 	
 	@RequestMapping(value="noticeDelete")
 	public String noticeDelete(Integer num,Model model,RedirectAttributes rd) throws Exception{
-		int result=noticeService.noticeDelete(num);
+		int result=noticeService.boardDelete(num);
 		String message="FAIL";
 		if(result>0){
 			message="SUCCESS";			

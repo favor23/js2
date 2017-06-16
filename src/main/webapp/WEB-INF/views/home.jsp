@@ -10,7 +10,7 @@
 	Hello world!  
 </h1>
 
-<P>  The time on the server is ${serverTime}. </P>
+<P> The time on the server is ${serverTime}. </P>
  <a href="notice/noticeList">NoticeList</a>
   <a href="free/freeList">FreeList</a>
 </body>
