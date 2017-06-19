@@ -13,8 +13,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.choa.board.BoardDTO;
+import com.choa.notice.NoticeDAOImpl;
 import com.choa.notice.NoticeDTO;
 import com.choa.notice.NoticeServiceImpl;
+import com.choa.util.MakePage;
+import com.choa.util.PageMaker;
 
 
 @Controller
@@ -23,14 +26,20 @@ public class NoticeController {
 	@Inject //인젝트는 type으로 찾는다
 	private NoticeServiceImpl noticeService;
 	
+
 	
 	@RequestMapping(value="noticeList")
 	public String noticeList(Model model,@RequestParam(defaultValue="1") Integer curPage) throws Exception{
-		
+		PageMaker pageMaker=new PageMaker(curPage, 10);
 		List<BoardDTO> ar=noticeService.boardList(curPage);
+		int totalCount=noticeService.boardCount();
+		/*System.out.println("totalCount2 : "+totalCount2);
+		int totalCount=noticeDAO.boardCount();
+		System.out.println("totalCount : "+totalCount);*/
+		MakePage makePage=pageMaker.getMakePage(totalCount);
 		model.addAttribute("list",ar);
 		model.addAttribute("board","notice");
-		
+		model.addAttribute("makePage",makePage);
 		return "board/boardList";
 	}
 

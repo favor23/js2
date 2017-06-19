@@ -20,6 +20,10 @@ public class NoticeServiceImpl implements BoardService{
 		this.noticeDAO=noticeDAO;
 	}		*/
 
+	public int boardCount() throws Exception{
+		return noticeDAO.boardCount();
+	}
+	
 	//view
 	@Override
 	public BoardDTO boardView(int num) throws Exception{

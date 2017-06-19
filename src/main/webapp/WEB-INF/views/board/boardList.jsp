@@ -42,7 +42,18 @@ table, tr, td {
 				<td>${dto.hit}</td>
 			</tr>
 		</c:forEach>
-	</table>
+	</table>	
+	 <c:if test="${makePage.curBlock>1 }">
+      <a href="${board }List?curPage=${makePage.startNum-1 }"><<</a>
+   </c:if>
+
+   <c:forEach begin="${makePage.startNum }" end="${makePage.lastNum }" var="i">
+      <a href="${board }List?curPage=${i }">${i }</a>
+   </c:forEach>
+   
+   <c:if test="${makePage.curBlock < makePage.totalBlock }">
+      <a href="${board }List?curPage=${makePage.lastNum+1 }">>></a>
+   </c:if>
 	<a href="${board}Write">noticeWrite</a>
 </body>
 </html>

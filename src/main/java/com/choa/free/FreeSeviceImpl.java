@@ -16,6 +16,10 @@ public class FreeSeviceImpl implements BoardService{
 	@Inject
 	private FreeDAOImpl freeDAO;
 
+	
+	public int boardCount() throws Exception{
+		return freeDAO.boardCount();		
+	}
 	@Override
 	public List<BoardDTO> boardList(int curPage) throws Exception {
 		PageMaker pageMaker=new PageMaker(curPage, 30);
@@ -24,26 +28,24 @@ public class FreeSeviceImpl implements BoardService{
 
 	@Override
 	public BoardDTO boardView(int num) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return freeDAO.boardView(num);
 	}
 
 	@Override
 	public int boardWrite(BoardDTO boardDTO) throws Exception {
 		// TODO Auto-generated method stub
-		return 0;
+		return freeDAO.boardWrite(boardDTO);
 	}
 
 	@Override
 	public int boardUpdate(BoardDTO boardDTO) throws Exception {
 		// TODO Auto-generated method stub
-		return 0;
+		return freeDAO.boardUpdate(boardDTO);
 	}
 
 	@Override
 	public int boardDelete(int num) throws Exception {
 		// TODO Auto-generated method stub
-		return 0;
+		return freeDAO.boardDelete(num);
 	}
-	
 }

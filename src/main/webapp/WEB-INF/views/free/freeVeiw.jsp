@@ -7,6 +7,15 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h2>freeVeiw</h2>
+<%--  <h1>free View</h1>
+   
+   num : ${dto.num } <br>
+   writer : ${dto.writer } <br>
+   title : ${dto.title } <br>
+   contents : ${dto.contents } <br>
+   hit : ${dto.hit }<br>
+   <a href="freeList?curPage=1">freeList</a><br>
+   <a href="freeDelete?num=${dto.num}">Delete</a>
+   <a href="freeUpdate?num=${dto.num}">Update</a> --%>
 </body>
 </html>

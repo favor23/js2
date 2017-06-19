@@ -1,13 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+table, tr, td{
+	border: 1px solid black; 
+}
+</style>
+<script type="text/javascript">
+	var m='${message}';
+	if(m!=''){
+		alert(m);
+	}
+</script>
 </head>
 <body>
-<h2>freeList</h2>
-
+	<h1>freeList</h1>
+	<table>
+	<tr><td>NUM</td><td>TITLE</td><td>WRITER</td><td>DATE</td><td>HIT</td></tr>
+	<c:forEach items="${list}" var="dto">
+		<tr><td>${dto.num}</td><td><a href="freeView?num=${dto.num}">${dto.title}</a></td><td>${dto.writer}</td><td>${dto.reg_date}</td><td>${dto.hit}</td></tr>
+	</c:forEach>
+	</table>		
+		<a href="freeWrite">freeWrite</a>
 </body>
 </html>
